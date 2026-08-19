@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>James Terrington — Graduate Aeronautical Engineer</title>
+<meta name="description" content="Engineering portfolio of James Terrington, MEng Aeronautical Engineering graduate: aerodynamics, CFD, gas turbine design and CAD.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E2A47;
+    --ink-soft:#4A5F76;
+    --paper:#F7F8FA;
+    --rule:#C9D3DE;
+    --rule-faint:#E4E9EF;
+    --accent:#0B7A8C;
+    --display:"Archivo",system-ui,sans-serif;
+    --body:"Source Sans 3",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --gut:clamp(20px,5vw,64px);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.55;
+  }
+  a{color:var(--accent)}
+  a:focus-visible,button:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  .wrap{max-width:1040px;margin:0 auto;padding:0 var(--gut)}
+
+  /* --- drawing border strip --- */
+  .strip{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:var(--paper);
+    border-bottom:1px solid var(--rule);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .strip .wrap{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding-top:12px;
+    padding-bottom:12px;
+  }
+
+  /* --- hero --- */
+  .hero{
+    position:relative;
+    padding:clamp(48px,9vw,104px) 0 clamp(36px,6vw,64px);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(to right,var(--rule-faint) 0 1px,transparent 1px 64px),
+      repeating-linear-gradient(to bottom,var(--rule-faint) 0 1px,transparent 1px 64px);
+    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 78%);
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 78%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin:0 0 18px;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(40px,8.5vw,78px);
+    line-height:.98;
+    letter-spacing:-.025em;
+    margin:0 0 18px;
+  }
+  .standfirst{
+    font-size:clamp(18px,2.2vw,21px);
+    line-height:1.5;
+    max-width:44ch;
+    margin:0 0 32px;
+    color:var(--ink-soft);
+  }
+  .standfirst strong{color:var(--ink);font-weight:600}
+
+  .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .btn{
+    display:inline-block;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:16px;
+    text-decoration:none;
+    padding:13px 24px;
+    border:1px solid var(--ink);
+    background:var(--ink);
+    color:var(--paper);
+    transition:background .18s ease,border-color .18s ease,color .18s ease;
+  }
+  .btn:hover{background:var(--accent);border-color:var(--accent)}
+  .btn-ghost{background:transparent;color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+  /* --- title block (signature) --- */
+  .titleblock{
+    margin:clamp(40px,7vw,72px) 0 0;
+    border:1px solid var(--ink);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .cell{padding:16px 18px;border-right:1px solid var(--rule)}
+  .cell:last-child{border-right:0}
+  .cell dt{
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+  }
+  .cell dd{margin:0;font-size:15px;line-height:1.4;font-weight:600}
+
+  /* --- projects --- */
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:16px;
+    margin:clamp(56px,9vw,96px) 0 4px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--ink);
+  }
+  h2{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(20px,3vw,26px);
+    letter-spacing:-.01em;
+    margin:0;
+  }
+  .count{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  .proj{
+    display:grid;
+    grid-template-columns:76px 1fr;
+    gap:0 24px;
+    padding:26px 0;
+    border-bottom:1px solid var(--rule-faint);
+  }
+  .year{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--accent);
+    padding-top:3px;
+  }
+  .proj h3{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:20px;
+    letter-spacing:-.01em;
+    margin:0 0 2px;
+  }
+  .kind{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+  .proj p.desc{margin:0 0 12px;max-width:62ch;color:var(--ink-soft)}
+  .tools{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .tools li{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink);
+    border:1px solid var(--rule);
+    padding:3px 9px;
+  }
+
+  /* --- closing --- */
+  .closing{
+    margin:clamp(56px,9vw,96px) 0 0;
+    padding:clamp(28px,5vw,44px);
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .closing h2{color:var(--paper);margin-bottom:10px}
+  .closing p{margin:0 0 24px;color:#B9C7D6;max-width:52ch}
+  .closing .btn{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .closing .btn:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+
+  footer{
+    margin-top:clamp(40px,6vw,64px);
+    border-top:1px solid var(--rule);
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+  footer .wrap{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 24px;
+    justify-content:space-between;
+    padding-top:18px;
+    padding-bottom:40px;
+  }
+  footer a{text-decoration:none;border-bottom:1px solid var(--rule)}
+  footer a:hover{border-bottom-color:var(--accent)}
+
+  /* --- reveal --- */
+  .reveal{opacity:0;transform:translateY(10px);animation:rise .5s ease forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  @media (max-width:460px){
+    .strip{font-size:10px;letter-spacing:.1em}
+    .strip .wrap{padding-top:10px;padding-bottom:10px}
+  }
+  @media (max-width:760px){
+    .titleblock{grid-template-columns:repeat(2,1fr)}
+    .cell{border-bottom:1px solid var(--rule)}
+    .cell:nth-child(2n){border-right:0}
+    .cell:nth-last-child(-n+2){border-bottom:0}
+    .proj{grid-template-columns:1fr;gap:0}
+    .year{padding:0 0 6px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;animation:none}
+    *{transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="strip">
+  <div class="wrap">
+    <span>James Terrington</span>
+    <span>Engineering portfolio &nbsp;/&nbsp; 2026</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow reveal">Graduate Aeronautical Engineer</p>
+    <h1 class="reveal" style="animation-delay:.05s">James<br>Terrington</h1>
+    <p class="standfirst reveal" style="animation-delay:.1s">
+      Seven university projects, from a <strong>turbofan sized from its cycle</strong> to a
+      <strong>UAV designed to fly on Titan</strong>. The full portfolio shows the methodology,
+      figures, key specifications and outcomes of each one.
+    </p>
+    <div class="actions reveal" style="animation-delay:.15s">
+      <a class="btn" href="JT_Engineering_Portfolio.pdf">Open the portfolio (PDF)</a>
+      <a class="btn btn-ghost" href="mailto:james.terrington@hotmail.co.uk">Get in touch</a>
+    </div>
+
+    <dl class="titleblock reveal" style="animation-delay:.2s">
+      <div class="cell">
+        <dt>Degree</dt>
+        <dd>MEng Aeronautical Engineering, 2:1</dd>
+      </div>
+      <div class="cell">
+        <dt>Institution</dt>
+        <dd>Loughborough University, 2026</dd>
+      </div>
+      <div class="cell">
+        <dt>Based</dt>
+        <dd>Cambridgeshire, willing to relocate</dd>
+      </div>
+      <div class="cell">
+        <dt>Status</dt>
+        <dd>Seeking a graduate engineering role</dd>
+      </div>
+    </dl>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="section-head">
+    <h2>Selected projects</h2>
+    <span class="count">2022 &ndash; 2026</span>
+  </div>
+
+  <article class="proj">
+    <div class="year">2026</div>
+    <div>
+      <h3>HERMES</h3>
+      <p class="kind">Group design project &middot; Team of nine</p>
+      <p class="desc">Aerodynamics lead on a long-endurance autonomous aircraft for scientific
+        exploration of Titan. I sized the 10.14&nbsp;m&sup2; high-aspect-ratio wing inside the
+        entry capsule's stowage constraints, reaching a minimum cruise L/D of 17.3, and led the
+        mission cost breakdown.</p>
+      <ul class="tools">
+        <li>XFLR5</li><li>OpenVSP</li><li>STAR-CCM+</li><li>Siemens NX</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="year">2026</div>
+    <div>
+      <h3>Nox</h3>
+      <p class="kind">Master's dissertation &middot; Individual</p>
+      <p class="desc">Rebuilt a conditional GAN that removes foreground stars from astrophotography
+        so the nebula behind them can be studied. New synthetic training data and a ResNet50V2
+        encoder cleared the halo artefacts the original left around bright stars, finishing
+        5.6&nbsp;dB of PSNR above the baseline.</p>
+      <ul class="tools">
+        <li>Python</li><li>TensorFlow</li><li>Computer vision</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="year">2025</div>
+    <div>
+      <h3>CFD projects</h3>
+      <p class="kind">Advanced CFD &middot; Individual</p>
+      <p class="desc">Two studies. A drag prediction of the DLR-F6 wing&ndash;body&ndash;pylon&ndash;nacelle
+        benchmarked against AIAA Drag Prediction Workshop wind tunnel data, landing within 3% at the
+        Ma&nbsp;0.75 cruise datum; and a conjugate heat transfer study of combustor effusion cooling,
+        where an adiabatic comparison isolated a 110% higher peak cooling effectiveness from conduction.</p>
+      <ul class="tools">
+        <li>STAR-CCM+</li><li>Mesh generation</li><li>Turbulence modelling</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="year">2025</div>
+    <div>
+      <h3>Military jet trainer</h3>
+      <p class="kind">Aircraft Design &middot; Team of five</p>
+      <p class="desc">Preliminary design of an advanced trainer to replace the RAF Hawk T2. I covered
+        constraint analysis, selection of the design point, the mission profile, sizing to MTOW, and
+        the retractable tricycle undercarriage CAD. Eight of ten brief requirements met.</p>
+      <ul class="tools">
+        <li>Constraint analysis</li><li>Mission sizing</li><li>Siemens NX</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="year">2024</div>
+    <div>
+      <h3>Gas turbine engine</h3>
+      <p class="kind">Gas Turbine Design &middot; Team of two</p>
+      <p class="desc">A high-bypass turbofan for a large civil airliner, sized to 16,000&nbsp;lbf cruise
+        thrust at Mach&nbsp;0.85. Cycle selected in GasTurb, then annulus sizing and free-vortex velocity
+        triangles from the fan through to the LPT, with HPT cooling flow traded against SFC across a
+        6&ndash;12% sweep. Thirty-two of thirty-four design criteria met.</p>
+      <ul class="tools">
+        <li>GasTurb</li><li>Turbomachinery</li><li>Siemens NX</li><li>BS 8888</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="year">2023</div>
+    <div>
+      <h3>Wing structure</h3>
+      <p class="kind">Structural design project &middot; Team of three</p>
+      <p class="desc">A load-bearing wing structure taken from concept to toleranced CAD of the
+        laser-cut parts, then to the assembly drawing and written work instructions a group of first
+        years built it from without us present. Best structural rigidity in the cohort.</p>
+      <ul class="tools">
+        <li>Siemens NX</li><li>Technical drawing</li><li>Laser cutting</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="proj">
+    <div class="year">2022</div>
+    <div>
+      <h3>Control-line aircraft</h3>
+      <p class="kind">Design and build &middot; Team of five</p>
+      <p class="desc">A balsa and ply control-line aircraft taken from NX assembly through workshop
+        manufacture to flight test in a single week. Successful take-off, circuit and landing in
+        testing; the airframe was lost to a nose-down impact on the assessed flight.</p>
+      <ul class="tools">
+        <li>Workshop manufacture</li><li>Siemens NX</li><li>Flight testing</li>
+      </ul>
+    </div>
+  </article>
+
+  <section class="closing">
+    <h2>The full portfolio</h2>
+    <p>Each project written up with the figures, the CFD and CAD output, and what I would
+      do differently.</p>
+    <a class="btn" href="JT_Engineering_Portfolio.pdf">Open the portfolio (PDF)</a>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>James Terrington &mdash; Graduate Aeronautical Engineer</span>
+    <span>
+      <a href="mailto:james.terrington@hotmail.co.uk">Email</a> &nbsp;
+      <a href="https://www.linkedin.com/in/james-terrington-84e">LinkedIn</a> &nbsp;
+      <a href="https://github.com/James-Terrington">GitHub</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
